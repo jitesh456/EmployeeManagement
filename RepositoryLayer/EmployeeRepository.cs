@@ -15,12 +15,6 @@ namespace RepositoryLayer
 
         private IConfiguration configuration;
 
-        
-           
-        
-
-
-
         /// <summary>
         /// This function will fetch data for employee and return all record. 
         /// </summary>
@@ -97,10 +91,13 @@ namespace RepositoryLayer
             Employee employee = new Employee();
             using (SqlConnection con = new SqlConnection(ConnectionString))
             {
-                string sqlQuery = "SELECT * FROM tblEmployee WHERE EmployeeID= " + id;
-                SqlCommand cmd = new SqlCommand(sqlQuery, con);
-                                   con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();
+                SqlCommand cmd = new SqlCommand("spGetEmployeeData", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@EmpId", id);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
                     if (rdr.HasRows)
                     {
                         while (rdr.Read())

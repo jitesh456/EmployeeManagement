@@ -45,10 +45,8 @@ namespace EmployeeBusinessLayer
         {
             try
             {
-
-                var result = this.employeeRepository.GetAllEmployees();
-                return this.SetResponse(result, true);
-
+                var result = this.employeeRepository.AddEmployee(employee);
+                return this.SetResponse(null, result);
             }
             catch (Exception e)
             {
@@ -84,9 +82,8 @@ namespace EmployeeBusinessLayer
         {
             try
             {
-                var result = this.employeeRepository.GetAllEmployees();
-                return this.SetResponse(result, true);
-
+                var result = this.employeeRepository.DeleteEmployee(id);
+                return this.SetResponse(null, result);
             }
             catch (Exception e)
             {
@@ -99,8 +96,8 @@ namespace EmployeeBusinessLayer
         {
             try
             {
-                var result = this.employeeRepository.GetAllEmployees();
-                return this.SetResponse(result, true);
+                var result = this.employeeRepository.EditEmployee(employee);
+                return this.SetResponse(null, result);
 
             }
             catch (Exception e)

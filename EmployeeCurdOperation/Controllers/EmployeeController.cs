@@ -82,7 +82,7 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Added";
-                return this.Ok(new { message, Data = response.Body });
+                return this.Ok(new { message});
             }
             message = "Operation Failed";
             return this.BadRequest(new { message, Data = response.Body });
@@ -101,10 +101,10 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Record Deleted";
-                return this.Ok(new { message, Data = response.Body });
+                return this.Ok(new { message });
             }
             message ="Failed to Delete Employee Record";
-            return this.BadRequest(new { message, Data = response.Body });
+            return this.BadRequest(new { message ,Data=response.Body});
         }
 
         // Update api/values/5
@@ -121,10 +121,10 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Record Updated";
-                return this.Ok(new { message, Data = response.Body });
+                return this.Ok(new { message});
             }
             message = "Failed to Update";
-            return this.BadRequest(new { message, Data = response.Body });
+            return this.BadRequest(new { message ,Data=response.Body });
         }
 
     }
