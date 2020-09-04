@@ -15,6 +15,12 @@ namespace RepositoryLayer
 
         private IConfiguration configuration;
 
+        public EmployeeRepository(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+            ConnectionString = configuration.GetSection("ConnectionStrings").GetSection("UserDbConnection").Value;
+        }
+
         /// <summary>
         /// This function will fetch data for employee and return all record. 
         /// </summary>
@@ -112,7 +118,7 @@ namespace RepositoryLayer
                     }
                     con.Close();
             }
-            return employee;
+            return null;
         }
 
         /// <summary>
@@ -165,11 +171,6 @@ namespace RepositoryLayer
             }
             return false;
         }
-
-        public void SetConfigratioh(IConfiguration configuration)
-        {
-            this.configuration = configuration;
-            ConnectionString = configuration.GetSection("ConnectionStrings").GetSection("UserDbConnection").Value;
-        }
+        
     }
 }

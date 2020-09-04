@@ -17,6 +17,11 @@ namespace EmployeeBusinessLayer
 
         IEmployeeRepository employeeRepository;
 
+        public EmployeeDataAccessLayer(IEmployeeRepository employeeRepository)
+        {
+            this.employeeRepository = employeeRepository;
+        }
+
 
         /// <summary>
         /// This function will fetch data for employee and return all record. 
@@ -115,9 +120,5 @@ namespace EmployeeBusinessLayer
             };
         }
         
-        public void SetEmployeeRepository(IEmployeeRepository employeeRepository)
-        {
-            this.employeeRepository = employeeRepository;
-        }
     }
 }

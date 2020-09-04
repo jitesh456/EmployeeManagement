@@ -1,5 +1,4 @@
 ﻿
-
 namespace EmployeeCurdOperation.Controllers
 {
     using System;
@@ -11,28 +10,21 @@ namespace EmployeeCurdOperation.Controllers
     using EmployeeBusinessLayer;
     using Microsoft.Extensions.Configuration;
     using RepositoryLayer;
+    using Microsoft.AspNetCore.Cors;
+    using System.Net;
 
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowOrigin")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeDataAccessLayer employeeDataAccessLayer;
-
-        private readonly IEmployeeRepository employeeRepository;
-
-        private IConfiguration configuration;
-
-
-        public EmployeeController(IEmployeeDataAccessLayer employeeDataAccessLayer,IEmployeeRepository employeeRepository,IConfiguration configuration)
+        
+        public EmployeeController(IEmployeeDataAccessLayer employeeDataAccessLayer)
         {
             this.employeeDataAccessLayer = employeeDataAccessLayer;
-            this.employeeRepository = employeeRepository;
-            this.configuration = configuration;
-            this.employeeDataAccessLayer.SetEmployeeRepository(employeeRepository);
-            this.employeeRepository.SetConfigratioh(configuration);
+            
         }
-
-
 
         /// <summary>
         /// This Api will return all Employee Data
@@ -46,10 +38,10 @@ namespace EmployeeCurdOperation.Controllers
             Response response=employeeDataAccessLayer.GetAllEmployees();
             if (response.Result) {
                  message = "Employee List";
-                return this.Ok(new {message ,Data=response.Body});
+                return this.Ok(new {message ,Data=response.Body, HttpStatusCode.OK});
             }
             message = "No Record Found";
-            return this.BadRequest(new {message, Data = response.Body });
+            return this.BadRequest(new {message, Data = response.Body, HttpStatusCode.BadRequest });
         }
 
         /// <summary>
@@ -64,16 +56,18 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Body!=null)
             {
                 message = "Employee Record";
-                return this.Ok(new { message, Data = response.Body });
+                return this.Ok(new { message, Data = response.Body ,HttpStatusCode.OK});
             }
             message = "No Record Found";
-            return this.BadRequest(new { message, Data = response.Body });
+            return this.BadRequest(new { message, Data = response.Body ,HttpStatusCode.BadRequest});
         }
 
         /// <summary>
         /// This Api will ADD Employee record in employee table.
         /// </summary>
         /// <returns> return employee data</returns>
+        
+        [EnableCors("AllowOrigin")]
         [HttpPost]
         public  IActionResult AddEmloyee([FromBody] Employee employee)
         {
@@ -82,10 +76,10 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Added";
-                return this.Ok(new { message});
+                return this.Ok(new { message,Data="", HttpStatusCode.OK });
             }
             message = "Operation Failed";
-            return this.BadRequest(new { message, Data = response.Body });
+            return this.BadRequest(new { message, Data = response.Body,HttpStatusCode.BadRequest });
         }
 
         // DELETE api/values/5
@@ -101,10 +95,10 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Record Deleted";
-                return this.Ok(new { message });
+                return this.Ok(new { message ,data="", HttpStatusCode.OK });
             }
             message ="Failed to Delete Employee Record";
-            return this.BadRequest(new { message ,Data=response.Body});
+            return this.BadRequest(new { message ,Data=response.Body, HttpStatusCode.BadRequest });
         }
 
         // Update api/values/5
@@ -121,10 +115,10 @@ namespace EmployeeCurdOperation.Controllers
             if (response.Result)
             {
                 message = "Employee Record Updated";
-                return this.Ok(new { message});
+                return this.Ok(new { message,data="",HttpStatusCode.OK});
             }
             message = "Failed to Update";
-            return this.BadRequest(new { message ,Data=response.Body });
+            return this.BadRequest(new { message ,Data=response.Body, HttpStatusCode.BadRequest });
         }
 
     }

@@ -19,6 +19,5 @@ namespace EmployeeBusinessLayer
 
         Response EditEmployee(Employee employee);
 
-        void SetEmployeeRepository(IEmployeeRepository employeeRepository);
     }
 }

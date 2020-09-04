@@ -11,6 +11,6 @@ namespace RepositoryLayer
         bool EditEmployee(Employee employee);
         IEnumerable<Employee> GetAllEmployees();
         Employee GetEmployeeData(int? id);
-        void SetConfigratioh(IConfiguration configuration);
+        
     }
 }
