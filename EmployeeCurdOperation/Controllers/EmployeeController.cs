@@ -8,7 +8,6 @@ namespace EmployeeCurdOperation.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Model;
     using EmployeeBusinessLayer;
-    using Microsoft.Extensions.Configuration;
     using RepositoryLayer;
     using Microsoft.AspNetCore.Cors;
     using System.Net;

@@ -9,7 +9,6 @@ namespace EmployeeBusinessLayer
     using System.Data.SqlClient;
     using Model;
     using System.Net;
-    using Microsoft.Extensions.Configuration;
     using RepositoryLayer;
 
     public class EmployeeDataAccessLayer : IEmployeeDataAccessLayer
