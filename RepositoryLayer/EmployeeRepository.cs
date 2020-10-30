@@ -8,7 +8,6 @@ namespace RepositoryLayer
     using Microsoft.Extensions.Configuration;
     using Model;
 
-
     public class EmployeeRepository : IEmployeeRepository
     {
         private string ConnectionString;
